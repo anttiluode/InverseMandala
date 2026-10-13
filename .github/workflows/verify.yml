@@ -1,0 +1,28 @@
+name: Verify inverse-mandala mechanics
+on:
+  push:
+    branches: [main, 'experiment/**']
+  pull_request:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q
+      - run: python inverse_mandala.py --output /tmp/inverse-mandala-reproduction --size 64 --iterations 90
+      - name: Verify the exact collision witness and headline pilot receipt
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/inverse-mandala-reproduction/summary.json'))
+          assert p['witness_max_abs_differences'] == {'1': 1.0,'3':0.0,'7':0.0,'16':0.0}
+          f=next(x for x in p['cases'] if x['image']=='face' and x['observations']==[16])
+          assert 9.0 < f['blind_source_psnr'] < 12.0
+          assert f['blind_forward_psnr']['16'] > 35
+          PY
