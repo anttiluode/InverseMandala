@@ -6,12 +6,18 @@ on:
       - 'coded_mandala.py'
       - 'tests/test_coded_mandala.py'
       - 'CODED_PROTOCOL.md'
+      - 'results/coded_v2.json'
+      - 'coded-results.js'
+      - 'index.html'
       - '.github/workflows/coded.yml'
   pull_request:
     paths:
       - 'coded_mandala.py'
       - 'tests/test_coded_mandala.py'
       - 'CODED_PROTOCOL.md'
+      - 'results/coded_v2.json'
+      - 'coded-results.js'
+      - 'index.html'
       - '.github/workflows/coded.yml'
   workflow_dispatch:
 jobs:
@@ -26,16 +32,30 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python -m pytest -q tests/test_inverse_mandala.py tests/test_coded_mandala.py
-      - run: python coded_mandala.py --size 64 --iterations 90 --output results/coded_v2.json
+      - run: node --check app.js && node --check coded-results.js
+      - run: python coded_mandala.py --size 64 --iterations 90 --output results/coded_v2_rerun.json
       - name: Display full machine-readable receipt for audit
         run: |
           python - <<'PY'
           import json
-          d=json.load(open('results/coded_v2.json'))
+          d=json.load(open('results/coded_v2_rerun.json'))
           print('CODED_RESULT_JSON='+json.dumps(d,sort_keys=True,allow_nan=False))
+          PY
+      - name: Check frozen receipt against independent rerun
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected = json.loads(Path('results/coded_v2.json').read_text())
+          actual = json.loads(Path('results/coded_v2_rerun.json').read_text())
+          for arm, score in expected['mean_source_psnr'].items():
+              assert abs(actual['mean_source_psnr'][arm] - score) < 0.12, (arm, score, actual['mean_source_psnr'][arm])
+          assert actual['collision'] == expected['collision']
+          assert actual['verdicts'] == expected['verdicts']
+          print('Full v2 reproduction agrees within 0.12 dB per arm; witnesses/verdicts identical.')
           PY
       - uses: actions/upload-artifact@v4
         with:
           name: coded-v2-json
-          path: results/coded_v2.json
+          path: results/coded_v2_rerun.json
           if-no-files-found: error
