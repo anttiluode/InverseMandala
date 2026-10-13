@@ -47,10 +47,24 @@
         <div class="topline"><div><span class="eyebrow">02 / FROZEN BENCHMARK</span><h2>Fit is not identity.</h2></div><a class="textlink" href="results/summary.json">Raw measurements ↗</a></div>
         <div class="resultgrid"><div class="bigmetric"><span>SYMMETRY 16 ONLY · FACE EXAMPLE</span><div class="metricpair"><strong>45.3</strong><em>dB</em></div><p>Forward agreement. The candidate almost perfectly reproduces the mandala.</p></div><div class="bigmetric contrast"><span>SAME CANDIDATE</span><div class="metricpair"><strong>10.3</strong><em>dB</em></div><p>Actual source recovery. The face reconstruction remains substantially wrong.</p></div><div class="bigmetric"><span>WITH 3, 7, 16 OBSERVATIONS</span><div class="metricpair"><strong>18.3</strong><em>dB</em></div><p>Actual source recovery improves when we change how the scene is interrogated.</p></div></div>
       </section>
+
+      <section class="results" id="coded">
+        <div class="topline"><div><span class="eyebrow">05 / ACTIVE OBSERVATION · V2</span><h2>What if the folds are questioned differently?</h2></div><a class="textlink" href="results/coded_v2.json">Full scored receipt ↗</a></div>
+        <p class="fine">From the Varjoluotain shadow problem: change the measurements <em>before</em> the maximum hides weaker copies. Every primary arm observes three full-size grayscale images. The fixed masks are digital interventions on each transformed layer, not an actual cardboard plate.</p>
+        <div class="coded-select"><label for="codedScene">COMPARE RECONSTRUCTION OF</label><select id="codedScene"><option value="all">All three synthetic scenes (mean)</option><option value="face">Asymmetric face</option><option value="symbols">Symbols</option><option value="landscape">Landscape</option></select><span id="codedScope" class="fine">Frozen source recovery scores</span></div>
+        <div id="codedChart" class="coded-chart" aria-live="polite"><p class="fine">Loading independently reproduced results…</p></div>
+        <div class="resultgrid coded-stats">
+          <div class="bigmetric"><span>THREE ORDINARY SYMMETRIES</span><div class="metricpair"><strong id="codedSym">15.45 dB</strong></div><p>Best average source recovery on this fixed pilot.</p></div>
+          <div class="bigmetric"><span>TWO CODED MASKS + BASELINE</span><div class="metricpair"><strong id="codedMean">13.73 dB</strong></div><p>Better than one N=16 composite, not better than three symmetry views.</p></div>
+          <div class="bigmetric contrast"><span>EXACT COLLISION: CODED / CONTRAST</span><div class="metricpair"><strong id="codedWitness">0.1625 / 1.0000</strong></div><p>Maximum observed change between two originally indistinguishable source images. Ordinary N=3, 7, 16 show zero difference.</p></div>
+        </div>
+        <p class="fine"><strong>Winner-selected source-pixel coverage (coded / extra symmetries):</strong> <span id="codedCoverage">Choose an individual scene</span>. Coverage is not unique invertibility. Contrast inversion also makes the exact collision visible, but performs poorly on these images with the fixed solver. <a href="CODED_PROTOCOL.md">The predeclared experiment</a> distinguishes stronger sensing from merely generating a plausible inverse.</p>
+      </section>
       <section class="lower"><div class="panel"><span class="eyebrow">03 / EXACT COLLISION</span><h2>Two different originals.<br/>One identical output.</h2><p>One all-white source and another with a single missing pixel yield the same mandala at N=3, 7 and 16. At N=1, they're distinguishable.</p><p>No decoder, no matter how sophisticated, can infer which source was used from those equal observations alone.</p><button id="flipWitness" class="secondary" type="button">Load ambiguity witness ↗</button></div><div class="panel"><span class="eyebrow">04 / THE LIMIT</span><h2>Folding ≠ revealing.</h2><p>Rotation and reflection move evidence around. The max operation suppresses all nonwinning contributions. Provenance reveals <em>which branch</em> won, not what the other branches carried.</p><p>Inverse rendering can select a plausible source. Identifiability requires enough independent measurements to rule out alternatives.</p><a class="textlink" href="PROTOCOL.md">Read the frozen protocol ↗</a></div></section>
       <footer><span>ANTTILUODE / INVERSEMANDALA</span><span>Started from two mandalas · 2026</span><a href="https://github.com/anttiluode/2mandalatools">Original mandala engine ↗</a></footer>
     </main>
   </div>
   <script src="app.js"></script>
+  <script src="coded-results.js"></script>
 </body>
 </html>
