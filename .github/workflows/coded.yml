@@ -1,0 +1,41 @@
+name: Coded pre-max measurement experiment (v2)
+on:
+  push:
+    branches: [main, 'experiment/**']
+    paths:
+      - 'coded_mandala.py'
+      - 'tests/test_coded_mandala.py'
+      - 'CODED_PROTOCOL.md'
+      - '.github/workflows/coded.yml'
+  pull_request:
+    paths:
+      - 'coded_mandala.py'
+      - 'tests/test_coded_mandala.py'
+      - 'CODED_PROTOCOL.md'
+      - '.github/workflows/coded.yml'
+  workflow_dispatch:
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_inverse_mandala.py tests/test_coded_mandala.py
+      - run: python coded_mandala.py --size 64 --iterations 90 --output results/coded_v2.json
+      - name: Display full machine-readable receipt for audit
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('results/coded_v2.json'))
+          print('CODED_RESULT_JSON='+json.dumps(d,sort_keys=True,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coded-v2-json
+          path: results/coded_v2.json
+          if-no-files-found: error
