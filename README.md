@@ -49,6 +49,43 @@ Source A is all ones. Source B differs in one interior pixel, which is zero. Wit
 
 Thus even the set of N=3,7,16 composites cannot distinguish those two sources. The inverse ambiguity is structural, not an AI training problem. Changing the kinds of observations (not merely increasing the symmetry) may help.
 
+## Active measurements v2 — Varjoluotain meets the mandala
+
+[Interactive scored comparison](https://anttiluode.github.io/InverseMandala/#coded) · [Protocol committed before results](CODED_PROTOCOL.md) · [Reproducible code](coded_mandala.py) · [Raw all-case results](results/coded_v2.json) · [Independent GitHub Actions run](https://github.com/anttiluode/InverseMandala/actions/runs/38434540767)
+
+In [Varjoluotain](https://github.com/anttiluode/Varjoluotain), an occluder makes different hidden scene pixels leave different signatures on a wall. Here the original nonlinear mandala loses nonwinning overlaps. A *pre-fusion* intervention can make a previously losing transformed copy win in a different observation. This is a digital, layer-controllable experiment, **not** a physical shadow-casting experiment.
+
+The frozen test holds the same inverse algorithm and 64×64 synthetic scenes fixed across equal **three-observation** arms. One- and two-observation references are explicitly separate:
+
+| Observations | Mean blind SOURCE PSNR ↑ | Exact white/one-dark-pixel collision separated? |
+| --- | ---: | :---: |
+| One ordinary N=16 | 7.37 dB | No |
+| Three identical N=16 (null) | 7.37 dB | No |
+| N=16 with two shifted rotation centers | 10.87 dB | No |
+| N=16 + two fixed coded per-branch masks | 13.73 dB | **Yes**, max difference 0.1625 |
+| N=16 + inverted contrast + shifted center | 9.36 dB | **Yes**, max difference 1.0 |
+| **Ordinary N=3, 7, 16** | **15.45 dB** | No |
+| N=16 + inverted contrast (two views) | 7.95 dB | **Yes**, max difference 1.0 |
+
+**Verdict:** The mask intervention defeats the *particular* exact collision that defeats three ordinary symmetry views. It also improves the fixed solver over one N=16 view. But ordinary complementary symmetry views beat all other tested three-view arms in **mean source recovery**, so the mask intervention is **not** the best reconstruction method in this pilot. The predeclared \`coded_advantage\` condition passed **only relative to shifted centers and mixed contrast**, not relative to ordinary symmetry. The stronger predeclared reconstruction-gain-over-symmetry gates **all failed**.
+
+Individually, source PSNR of symmetries vs coded masks is: face **17.63 vs 16.60 dB**, symbols **13.30 vs 12.56 dB**, landscape **15.43 vs 12.04 dB**. High forward agreement is not identity recovery.
+
+The winner-selected Jacobian's source-column coverage need not track PSNR: contrast views can cover many source pixels but leave poor reconstruction under this solver. This is a useful warning that local nonzero sensitivity is not the same as well-conditioned inversion.
+
+### Where the physical analogy stops
+
+These masks apply independently to digitally generated transformed copies *before* the max, with fixed 8×8 per-layer transmission patterns (seed 11/29). A cardboard plate in a real room cannot ordinarily adjust each virtual rotated copy separately. Inversion also knows the intervention pattern. Negative contrast likewise requires the ability to invert the physical stimulus, not merely photograph the same scene again. These interventions are appropriate for a computational instrument but should not be called experimental periscopy.
+
+All trials are synthetic, noise-free, with a known model; a fixed 90-step L-BFGS-B heuristic can underfit and is not an optimal bound. OpenCV uses quantized bilinear interpolation, while the derivative model uses continuous interpolation. Mask storage / measurement-energy costs and natural-image priors are **not** evaluated. The collision counterexample proves only that a specific ambiguity can be broken, not that the original is uniquely recovered.
+
+Reproduce:
+
+\`\`\`bash
+python -m pytest -q tests/test_coded_mandala.py
+python coded_mandala.py --size 64 --iterations 90 --output results/coded_v2.json
+\`\`\`
+
 ## Scientific boundaries
 
 The fixed pilot tests three synthetic 64×64 drawings, not natural images. The full application also performs grayscale conversion, radial Fourier EQ, per-frame normalization and false-color rendering; this repo isolates **only** the mandala mixing operator. Source color cannot be reconstructed once grayscale was applied. OpenCV's interpolation and image clipping also prevent an ideal mathematical "unfolding."
