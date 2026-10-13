@@ -1,0 +1,293 @@
+{
+  "protocol": "PROTOCOL.md",
+  "source": "2mandalatools/frequency_mandalas3.py:create_mandala",
+  "image_size": 64,
+  "iterations": 90,
+  "witness_max_abs_differences": {
+    "1": 1.0,
+    "3": 0.0,
+    "7": 0.0,
+    "16": 0.0
+  },
+  "cases": [
+    {
+      "image": "face",
+      "observations": [
+        16
+      ],
+      "blind_source_psnr": 10.3093764150047,
+      "blind_forward_psnr": {
+        "16": 45.3343974092834
+      },
+      "blind_info": {
+        "success": false,
+        "iterations": 90,
+        "optimization_cost": 2.291876716062048e-05,
+        "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+        "start": "observed",
+        "smoothing": 0.0005
+      },
+      "oracle_source_psnr": 9.709222612212502,
+      "oracle_forward_psnr": {
+        "16": 29.300622688571423
+      },
+      "oracle_info": {
+        "winner_coverage_fraction": 0.4697265625,
+        "unobserved_source_pixels": 2172,
+        "damping": 0.02,
+        "iterations": 90
+      }
+    },
+    {
+      "image": "face",
+      "observations": [
+        7,
+        16
+      ],
+      "blind_source_psnr": 14.15047788212701,
+      "blind_forward_psnr": {
+        "7": 46.92241448877815,
+        "16": 51.96384055539643
+      },
+      "blind_info": {
+        "success": false,
+        "iterations": 90,
+        "optimization_cost": 1.4248929549747564e-05,
+        "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+        "start": "observed",
+        "smoothing": 0.0005
+      },
+      "oracle_source_psnr": 13.037020336481838,
+      "oracle_forward_psnr": {
+        "7": 34.820793174994265,
+        "16": 32.38483064107253
+      },
+      "oracle_info": {
+        "winner_coverage_fraction": 0.6953125,
+        "unobserved_source_pixels": 1248,
+        "damping": 0.02,
+        "iterations": 90
+      }
+    },
+    {
+      "image": "face",
+      "observations": [
+        3,
+        7,
+        16
+      ],
+      "blind_source_psnr": 18.33209578799631,
+      "blind_forward_psnr": {
+        "3": 53.92526831673635,
+        "7": 55.49777409949026,
+        "16": 57.138019258490786
+      },
+      "blind_info": {
+        "success": false,
+        "iterations": 90,
+        "optimization_cost": 8.76110693942271e-06,
+        "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+        "start": "observed",
+        "smoothing": 0.0005
+      },
+      "oracle_source_psnr": 18.82318502248214,
+      "oracle_forward_psnr": {
+        "3": 43.0741430769048,
+        "7": 41.60857156514253,
+        "16": 40.8630439570627
+      },
+      "oracle_info": {
+        "winner_coverage_fraction": 0.88232421875,
+        "unobserved_source_pixels": 482,
+        "damping": 0.02,
+        "iterations": 90
+      }
+    },
+    {
+      "image": "symbols",
+      "observations": [
+        16
+      ],
+      "blind_source_psnr": 6.155031843179087,
+      "blind_forward_psnr": {
+        "16": 48.750041961775324
+      },
+      "blind_info": {
+        "success": false,
+        "iterations": 90,
+        "optimization_cost": 1.5595049556630987e-05,
+        "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+        "start": "observed",
+        "smoothing": 0.0005
+      },
+      "oracle_source_psnr": 10.356022055081977,
+      "oracle_forward_psnr": {
+        "16": 32.58763254350135
+      },
+      "oracle_info": {
+        "winner_coverage_fraction": 0.33349609375,
+        "unobserved_source_pixels": 2730,
+        "damping": 0.02,
+        "iterations": 90
+      }
+    },
+    {
+      "image": "symbols",
+      "observations": [
+        7,
+        16
+      ],
+      "blind_source_psnr": 9.994376926320781,
+      "blind_forward_psnr": {
+        "7": 49.14154289562458,
+        "16": 54.84243640118151
+      },
+      "blind_info": {
+        "success": false,
+        "iterations": 90,
+        "optimization_cost": 1.3785897029755664e-05,
+        "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+        "start": "observed",
+        "smoothing": 0.0005
+      },
+      "oracle_source_psnr": 14.973605050582064,
+      "oracle_forward_psnr": {
+        "7": 40.851396801101394,
+        "16": 36.774999578973436
+      },
+      "oracle_info": {
+        "winner_coverage_fraction": 0.569091796875,
+        "unobserved_source_pixels": 1765,
+        "damping": 0.02,
+        "iterations": 90
+      }
+    },
+    {
+      "image": "symbols",
+      "observations": [
+        3,
+        7,
+        16
+      ],
+      "blind_source_psnr": 13.24594594240275,
+      "blind_forward_psnr": {
+        "3": 52.11974783922244,
+        "7": 55.46047527565223,
+        "16": 62.31884913385094
+      },
+      "blind_info": {
+        "success": false,
+        "iterations": 90,
+        "optimization_cost": 1.1052851361618741e-05,
+        "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+        "start": "observed",
+        "smoothing": 0.0005
+      },
+      "oracle_source_psnr": 21.251475027549294,
+      "oracle_forward_psnr": {
+        "3": 49.532405541058026,
+        "7": 52.03367892256483,
+        "16": 49.36699004460956
+      },
+      "oracle_info": {
+        "winner_coverage_fraction": 0.7900390625,
+        "unobserved_source_pixels": 860,
+        "damping": 0.02,
+        "iterations": 90
+      }
+    },
+    {
+      "image": "landscape",
+      "observations": [
+        16
+      ],
+      "blind_source_psnr": 5.459736266245317,
+      "blind_forward_psnr": {
+        "16": 51.871170340726216
+      },
+      "blind_info": {
+        "success": false,
+        "iterations": 90,
+        "optimization_cost": 9.329751627039723e-06,
+        "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+        "start": "observed",
+        "smoothing": 0.0005
+      },
+      "oracle_source_psnr": 11.427699083287017,
+      "oracle_forward_psnr": {
+        "16": 38.7091911482544
+      },
+      "oracle_info": {
+        "winner_coverage_fraction": 0.223388671875,
+        "unobserved_source_pixels": 3181,
+        "damping": 0.02,
+        "iterations": 90
+      }
+    },
+    {
+      "image": "landscape",
+      "observations": [
+        7,
+        16
+      ],
+      "blind_source_psnr": 8.612518876817127,
+      "blind_forward_psnr": {
+        "7": 49.35606620911517,
+        "16": 53.258970579349906
+      },
+      "blind_info": {
+        "success": false,
+        "iterations": 90,
+        "optimization_cost": 1.03281203548159e-05,
+        "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+        "start": "observed",
+        "smoothing": 0.0005
+      },
+      "oracle_source_psnr": 15.331635123674186,
+      "oracle_forward_psnr": {
+        "7": 43.469673423641,
+        "16": 53.15472672126954
+      },
+      "oracle_info": {
+        "winner_coverage_fraction": 0.441650390625,
+        "unobserved_source_pixels": 2287,
+        "damping": 0.02,
+        "iterations": 90
+      }
+    },
+    {
+      "image": "landscape",
+      "observations": [
+        3,
+        7,
+        16
+      ],
+      "blind_source_psnr": 16.104647052959482,
+      "blind_forward_psnr": {
+        "3": 53.934656812050946,
+        "7": 59.24773471252764,
+        "16": 62.840408358585066
+      },
+      "blind_info": {
+        "success": false,
+        "iterations": 90,
+        "optimization_cost": 7.529731009892063e-06,
+        "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+        "start": "observed",
+        "smoothing": 0.0005
+      },
+      "oracle_source_psnr": 24.199275025389326,
+      "oracle_forward_psnr": {
+        "3": 51.864090649770304,
+        "7": 56.16991447225018,
+        "16": 68.63364754903469
+      },
+      "oracle_info": {
+        "winner_coverage_fraction": 0.720947265625,
+        "unobserved_source_pixels": 1143,
+        "damping": 0.02,
+        "iterations": 90
+      }
+    }
+  ]
+}
